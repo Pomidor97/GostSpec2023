@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+            Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{E9F1AA42-9FC3-430D-9CA9-DDC86BC1D39E}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>GostSpec2023</RootNamespace>
+        <AssemblyName>GostSpec2023</AssemblyName>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>x64</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>x64</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="PresentationCore" />
+        <Reference Include="RevitAPI">
+          <HintPath>..\API\RevitAPI.dll</HintPath>
+        </Reference>
+        <Reference Include="RevitAPIUI">
+          <HintPath>..\API\RevitAPIUI.dll</HintPath>
+        </Reference>
+        <Reference Include="System"/>
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Data"/>
+        <Reference Include="System.Xml"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="App.cs" />
+        <Compile Include="Commands\AutoScheduleCommand.cs" />
+        <Compile Include="Commands\CopyParametersCommand.cs" />
+        <Compile Include="Commands\NumberingCommand.cs" />
+        <Compile Include="Constants\GOSTSpecConstants.cs" />
+        <Compile Include="Services\IParameterCopyService.cs" />
+        <Compile Include="Services\ParameterCopyService.cs" />
+        <Compile Include="Processors\DuctInsulationProcessor.cs" />
+        <Compile Include="Processors\DuctProcessor.cs" />
+        <Compile Include="Processors\ICategoryProcessor.cs" />
+        <Compile Include="Processors\PipeInsulationProcessor.cs" />
+        <Compile Include="Processors\PipeProcessor.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="RevitParamUtils\RevitParamUtils.cs" />
+        <Compile Include="ServiceLocator.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Include="Resource\icons8_copy_32.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Resource\icons8_counter_32.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Resource\icons8_schedule_32.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="GostSpec2023.addin" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>

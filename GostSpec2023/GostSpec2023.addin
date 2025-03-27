@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>GostSpec2023 - Оформление спецификации по ГОСТ</Name>
+    <Assembly>GostSpec2023.dll</Assembly>
+    <FullClassName>GostSpec2023.App</FullClassName>
+    <ClientId>3cabbe36-709a-4132-bd15-2ee7bec99c85</ClientId>
+    <VendorId>com.Zhassulan</VendorId>
+    <VendorDescription>Zhassulan Suleiman</VendorDescription>
+  </AddIn>
+</RevitAddIns>
