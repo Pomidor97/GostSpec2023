@@ -14,8 +14,13 @@ namespace GostSpec2023.Services
         {
             _processors = new Dictionary<BuiltInCategory, ICategoryProcessor>
             {
-                { BuiltInCategory.OST_PipeCurves, new PipeProcessor() }
-                // Добавим другие процессоры позже
+                { BuiltInCategory.OST_PipeCurves, new PipeProcessor() },
+                { BuiltInCategory.OST_PipeInsulations, new PipeInsulationProcessor() },
+                { BuiltInCategory.OST_MechanicalEquipment, new GeneralProcessor() },     
+                { BuiltInCategory.OST_PlumbingFixtures, new GeneralProcessor() },        
+                { BuiltInCategory.OST_Sprinklers, new GeneralProcessor() },         
+                { BuiltInCategory.OST_PipeFitting, new GeneralProcessor() }
+                
             };
         }
 
@@ -46,5 +51,6 @@ namespace GostSpec2023.Services
 
             return 1.0; // по умолчанию
         }
+        
     }
 }

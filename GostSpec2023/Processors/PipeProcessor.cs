@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Autodesk.Revit.DB;
 using GostSpec2023.Constants;
+using GostSpec2023.Utils;
 
 namespace GostSpec2023.Processors
 {
@@ -14,11 +15,11 @@ namespace GostSpec2023.Processors
                 {
                     var pipeType = doc.GetElement(pipe.GetTypeId());
 
-                    string srcName    = RevitParamUtils.RevitParamUtils.GetParamAsString(pipeType, GostSpecConstants.SRC_Naimen);
-                    var typTruby   = RevitParamUtils.RevitParamUtils.GetParamAsDouble(pipe, GostSpecConstants.SRC_TypTruby, true);
-                    var pipeOut    = RevitParamUtils.RevitParamUtils.GetParamAsDouble(pipe, "Внешний диаметр");
-                    var pipeIn     = RevitParamUtils.RevitParamUtils.GetParamAsDouble(pipe, "Внутренний диаметр");
-                    string pipeSize   = RevitParamUtils.RevitParamUtils.GetParamAsString(pipe, "Размер");
+                    string srcName    = RevitParamUtils.GetParamAsString(pipeType, GostSpecConstants.SRC_Naimen);
+                    var typTruby   = RevitParamUtils.GetParamAsDouble(pipe, GostSpecConstants.SRC_TypTruby, true);
+                    var pipeOut    = RevitParamUtils.GetParamAsDouble(pipe, "Внешний диаметр");
+                    var pipeIn     = RevitParamUtils.GetParamAsDouble(pipe, "Внутренний диаметр");
+                    string pipeSize   = RevitParamUtils.GetParamAsString(pipe, "Размер");
 
                     double thickness  = UnitUtils.ConvertFromInternalUnits((pipeOut - pipeIn) / 2.0, DisplayUnitType.DUT_MILLIMETERS);
                     pipeOut           = UnitUtils.ConvertFromInternalUnits(pipeOut, DisplayUnitType.DUT_MILLIMETERS);
@@ -32,17 +33,17 @@ namespace GostSpec2023.Processors
                         _ => "ТАКОЙ ТИП ТРУБЫ НЕ СУЩЕСТВУЕТ. Доступно 1-3"
                     };
 
-                    RevitParamUtils.RevitParamUtils.SetParam(pipe, GostSpecConstants.S_Name, targetName);
-                    RevitParamUtils.RevitParamUtils.SetParam(pipe, GostSpecConstants.S_Marka,   RevitParamUtils.RevitParamUtils.GetParamAsString(pipeType, GostSpecConstants.SRC_Marka));
-                    RevitParamUtils.RevitParamUtils.SetParam(pipe, GostSpecConstants.S_KodIzd,  RevitParamUtils.RevitParamUtils.GetParamAsString(pipeType, GostSpecConstants.SRC_KodIzd));
-                    RevitParamUtils.RevitParamUtils.SetParam(pipe, GostSpecConstants.S_Zavod,   RevitParamUtils.RevitParamUtils.GetParamAsString(pipeType, GostSpecConstants.SRC_Zavod));
-                    RevitParamUtils.RevitParamUtils.SetParam(pipe, GostSpecConstants.S_EdIzm,   RevitParamUtils.RevitParamUtils.GetParamAsString(pipeType, GostSpecConstants.SRC_EdIzm));
-                    RevitParamUtils.RevitParamUtils.SetParam(pipe, GostSpecConstants.S_Primech, RevitParamUtils.RevitParamUtils.GetParamAsString(pipe, GostSpecConstants.SRC_Primech));
+                    RevitParamUtils.SetParam(pipe, GostSpecConstants.S_Name, targetName);
+                    RevitParamUtils.SetParam(pipe, GostSpecConstants.S_Marka,   RevitParamUtils.GetParamAsString(pipeType, GostSpecConstants.SRC_Marka));
+                    RevitParamUtils.SetParam(pipe, GostSpecConstants.S_KodIzd,  RevitParamUtils.GetParamAsString(pipeType, GostSpecConstants.SRC_KodIzd));
+                    RevitParamUtils.SetParam(pipe, GostSpecConstants.S_Zavod,   RevitParamUtils.GetParamAsString(pipeType, GostSpecConstants.SRC_Zavod));
+                    RevitParamUtils.SetParam(pipe, GostSpecConstants.S_EdIzm,   RevitParamUtils.GetParamAsString(pipeType, GostSpecConstants.SRC_EdIzm));
+                    RevitParamUtils.SetParam(pipe, GostSpecConstants.S_Primech, RevitParamUtils.GetParamAsString(pipe, GostSpecConstants.SRC_Primech));
 
-                    double lengthInternal = RevitParamUtils.RevitParamUtils.GetParamAsDouble(pipe, "Длина");
+                    double lengthInternal = RevitParamUtils.GetParamAsDouble(pipe, "Длина");
                     double lengthMM       = UnitUtils.ConvertFromInternalUnits(lengthInternal, DisplayUnitType.DUT_MILLIMETERS);
                     double finalCount     = (lengthMM * zapas) / 1000.0;
-                    RevitParamUtils.RevitParamUtils.SetParam(pipe, GostSpecConstants.S_Count, finalCount);
+                    RevitParamUtils.SetParam(pipe, GostSpecConstants.S_Count, finalCount);
                 }
                 catch
                 {
